@@ -1,19 +1,19 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const express = require('express');
+const app = express();
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+// El puerto en el que la aplicación escuchará.
+// La variable de entorno PORT es proporcionada por App Hosting.
+const port = process.env.PORT || 8080;
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+// Definimos una ruta para la URL raíz ('/')
+app.get('/', (req, res) => {
+  // Esta es una respuesta similar a la de tu función helloWorld original
+  console.log('¡Hola logs! Se recibió una solicitud.'); 
+  res.send('¡Hola desde Firebase, servido por App Hosting!');
+});
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+// Iniciamos el servidor
+app.listen(port, () => {
+  console.log(`Aplicación escuchando en el puerto ${port}`);
+  console.log('Presiona Ctrl+C para salir si se ejecuta localmente.');
+});
